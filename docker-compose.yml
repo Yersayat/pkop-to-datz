@@ -1,0 +1,41 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: npz_db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: npz
+      MYSQL_USER: npz_user
+      MYSQL_PASSWORD: npz_pass
+    ports:
+      - "3307:3306"
+    command: ["--default-authentication-plugin=mysql_native_password"]
+    healthcheck:
+      test: [ "CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -prootpass --silent" ]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+
+  api:
+    build: .
+    container_name: npz_api
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      PORT: 8080
+      API_PREFIX: /api/v1
+      AUTH_MODE: none
+      JWT_AUDIENCE: npz-ish
+      JWT_ISSUER: npz-issuer
+      JWT_ALG: HS256
+      JWT_SECRET: dev-secret
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: npz
+      DB_USER: npz_user
+      DB_PASSWORD: npz_pass
+      LOG_LEVEL: info
+    ports:
+      - "8080:8080"

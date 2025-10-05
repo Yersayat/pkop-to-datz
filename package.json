@@ -1,0 +1,40 @@
+{
+  "name": "npz-api",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "NODE_ENV=development nodemon src/server.js",
+    "start": "node src/server.js",
+    "migrate": "sequelize db:migrate",
+    "seed": "sequelize db:seed:all",
+    "migrate:undo": "sequelize db:migrate:undo:all",
+    "lint": "eslint .",
+    "compose:up": "docker compose -f docker-compose.dev.yml up --build",
+    "compose:up:detached": "docker compose -f docker-compose.dev.yml up --build -d",
+    "compose:down": "docker compose -f docker-compose.dev.yml down --remove-orphans",
+    "compose:down:v": "docker compose -f docker-compose.dev.yml down -v",
+    "compose:build": "docker build --platform linux/amd64 -t npz-api:1.0.1 --target prod . ",
+    "compose:save": "docker save npz-api:1.0.1 -o npz-api_1.0.1_amd64.tar"
+  },
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "helmet": "^7.1.0",
+    "http-errors": "^2.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.11.0",
+    "pino": "^9.3.2",
+    "pino-http": "^10.0.0",
+    "prom-client": "^15.1.3",
+    "sequelize": "^6.37.3"
+  },
+  "devDependencies": {
+    "eslint": "^9.9.0",
+    "nodemon": "^3.1.4",
+    "sequelize-cli": "^6.6.2"
+  }
+}

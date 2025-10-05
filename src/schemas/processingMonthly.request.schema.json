@@ -1,0 +1,41 @@
+{
+  "$id": "https://npz/api/v1/schemas/processingMonthly.request.schema.json",
+  "type": "object",
+  "required": ["plant_id", "rows"],
+  "properties": {
+    "plant_id": { "type": "string", "minLength": 1, "maxLength": 16 },
+    "report_date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+    "year": { "type": "integer", "minimum": 1970, "maximum": 2100 },
+    "rows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["producer_name","total_fact_tonnes"],
+        "properties": {
+          "producer_name": { "type": "string", "minLength": 1 },
+          "months": {
+            "type": "object",
+            "properties": {
+              "jan": { "type": "object", "properties": { "fact_tonnes": { "type": "number", "minimum": 0 } }, "additionalProperties": false },
+              "feb": { "type": "object", "properties": { "fact_tonnes": { "type": "number", "minimum": 0 } }, "additionalProperties": false },
+              "mar": { "type": "object", "properties": { "fact_tonnes": { "type": "number", "minimum": 0 } }, "additionalProperties": false },
+              "apr": { "type": "object", "properties": { "fact_tonnes": { "type": "number", "minimum": 0 } }, "additionalProperties": false },
+              "may": { "type": "object", "properties": { "fact_tonnes": { "type": "number", "minimum": 0 } }, "additionalProperties": false },
+              "jun": { "type": "object", "properties": { "fact_tonnes": { "type": "number", "minimum": 0 } }, "additionalProperties": false },
+              "jul": { "type": "object", "properties": { "fact_tonnes": { "type": "number", "minimum": 0 } }, "additionalProperties": false },
+              "aug": { "type": "object", "properties": { "fact_tonnes": { "type": "number", "minimum": 0 } }, "additionalProperties": false },
+              "sep": { "type": "object", "properties": { "fact_tonnes": { "type": "number", "minimum": 0 } }, "additionalProperties": false },
+              "oct": { "type": "object", "properties": { "fact_tonnes": { "type": "number", "minimum": 0 } }, "additionalProperties": false },
+              "nov": { "type": "object", "properties": { "fact_tonnes": { "type": "number", "minimum": 0 } }, "additionalProperties": false },
+              "dec": { "type": "object", "properties": { "fact_tonnes": { "type": "number", "minimum": 0 } }, "additionalProperties": false }
+            },
+            "additionalProperties": false
+          },
+          "total_fact_tonnes": { "type": "number", "minimum": 0 }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

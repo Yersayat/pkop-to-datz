@@ -1,0 +1,27 @@
+{
+  "$id": "https://npz/api/v1/schemas/stocksClosing.request.schema.json",
+  "type": "object",
+  "required": ["plant_id", "report_date", "rows"],
+  "properties": {
+    "plant_id": { "type": "string", "minLength": 1, "maxLength": 16 },
+    "report_date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+    "rows": {
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "type": "object",
+        "required": ["row_no", "product_code", "product_name", "stock_closing_qty", "uom"],
+        "properties": {
+          "row_no": { "type": "integer", "minimum": 1 },
+          "supplier_name": { "type": ["string","null"] },
+          "product_code": { "type": "string", "minLength": 1 },
+          "product_name": { "type": "string", "minLength": 1 },
+          "stock_closing_qty": { "type": "number", "minimum": 0 },
+          "uom": { "type": "string", "enum": ["t"] }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

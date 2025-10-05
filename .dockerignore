@@ -1,0 +1,31 @@
+# зависимости и кеши
+node_modules
+npm-debug.log*
+yarn-error.log*
+.pnpm-store
+
+# VCS и IDE
+.git
+.gitignore
+.vscode
+.idea
+
+# сборка/артефакты/логи
+dist
+build
+coverage
+*.log
+logs
+tmp
+.cache
+
+# прочее тяжёлое/временное
+*.zip
+*.tar
+*.tar.gz
+uploads
+data
+backup
+.env*
+Dockerfile*
+docker-compose*.yml
